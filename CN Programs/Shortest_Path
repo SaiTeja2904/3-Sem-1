@@ -1,0 +1,78 @@
+#include<stdio.h>
+#include<conio.h>
+#include<string.h>
+#define max_node 100
+#define infinity 1000
+int n;
+int dist[max_node][max_node];
+int i,j,s,t,path[max_node];
+void shortest_path(int,int,int [20]);
+void main()
+{
+clrscr();
+printf("enter no of nodes");
+scanf("%d",&n);
+printf("\n enter the dist matrix \n");
+for(i=1;i<=n;i++)
+  for(j=1;j<=n;j++)
+ {
+   scanf("%d",&dist[i][j]);
+   if(dist[i][j]==0)
+   dist[i][j]==infinity;
+ }
+printf("\n enter the source node");
+scanf("%d",&s);
+printf("\n enter the destination node");
+scanf("%d",&t);
+for(i=1;i<=n;i++)
+     path[i]=dist[s][i];
+
+  shortest_path(s,t,path);
+
+}
+void shortest_path(int s,int t,int path[20])
+{
+struct state
+{
+   int pre,l;
+   enum{permanent,tentative}label;
+    }state[max_node];
+ int i,k,min;
+struct state *p;
+  for(p=&state[0];p<&state[n];p++)
+  {
+     p->pre=-1;
+     p->l=infinity;
+     p->label=tentative;
+  }
+    state[t].l=0;
+    state[t].label=permanent;
+    k=t;
+    do
+    {
+      for(i=0;i<n;i++)
+       if(dist[k][i]!=0&&state[i].label==tentative)
+       {
+	 if(state[k].l+dist[k][i]<state[i].l)
+       {
+	state[i].pre=k;
+	state[i].l=state[k].l+dist[k][i];
+	}
+       }
+    k=0;min=infinity;
+    for(i=0;i<n;i++)
+	if(state[i].label==tentative&&state[i].l<min)
+	 {
+	  min=state[i].l;
+	  k=i;
+	 }
+      state[k].label=permanent;
+    }while(k!=s);
+    i=0;k=s;
+    do
+    {
+      path[i++]=k;
+      printf("----> %d",k);
+       k=state[k].pre;
+    }while(k>=0);
+  }
