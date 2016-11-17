@@ -6,7 +6,7 @@ char a[10][10],followResult[10];
 void follow(char c);
 void first(char c);
 int isExisting(char);
-void addToResult(char);
+
 int main()
  {
  int i;
