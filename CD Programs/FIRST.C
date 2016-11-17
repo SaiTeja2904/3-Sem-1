@@ -3,7 +3,6 @@
 #include<ctype.h>
 int n,m=0,p,i=0,j=0;
 char a[10][10],followResult[10];
-void follow(char c);
 void first(char c);
 int isExisting(char);
 
