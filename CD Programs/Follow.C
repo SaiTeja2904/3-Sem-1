@@ -106,7 +106,7 @@ void first(char c)
 
 int k;
 
-if(!isupper(a[k][0]))
+if(!isupper(c) && c!='$')
    addToResult(c);
 
 for(k=0;k<n;k++)
@@ -119,7 +119,7 @@ if(a[k][0]==c)
 
 if(a[k][2]=='$') follow(a[i][0]);
 
-else if(islower(a[k][2]))
+else if(!isupper(a[k][2]))
 addToResult(a[k][2]);
 
 else first(a[k][2]);
